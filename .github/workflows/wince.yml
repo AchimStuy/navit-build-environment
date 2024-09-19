@@ -1,0 +1,38 @@
+name: WinCE Image
+
+on:
+  push:
+    paths: 
+      - 'wince'
+  pull_request:
+    paths: 
+      - 'wince'
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository_owner }}/wince
+
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        target_arch: [arm, i386]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: windows-ce-build-environment-arm
+        registry: ghcr.io
+        buildArgs: target_arch=arm
+        addLatest: true
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
