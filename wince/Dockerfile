@@ -1,7 +1,7 @@
 FROM debian:stable
 
 RUN apt update \
-    && apt install -y --no-install-recommends bzip2 cmake wget \
+    && apt install -y --no-install-recommends build-essential bzip2 cmake wget \
     && apt clean \
     && apt autoremove
 
