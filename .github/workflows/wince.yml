@@ -3,10 +3,10 @@ name: WinCE Image
 on:
   push:
     paths: 
-      - 'wince'
+      - 'wince/*'
   pull_request:
     paths: 
-      - 'wince'
+      - 'wince/*'
   workflow_dispatch:
 
 env:
